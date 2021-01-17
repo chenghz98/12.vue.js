@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 使用v-text不会有闪烁问题,不用写插值表达式,直接写对应的变量名 -->
+    <div id="txt">
+        <!--vue中只有在标签的内容才使用插值表达法-->
+        <p v-text="msg"></p>
+        <p>
+            {{msg}}
+        </p>
+    </div>
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#txt",
+            data: {
+                msg: '你好,vue'
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 设置cloak属性样式 */
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 引入cloak属性防止页面刷新时的闪烁 -->
+        <div v-cloak>
+            {{
+                msg
+            }}
+        </div>
+        <div v-cloak>
+            {{11}}
+        </div>
+        <div v-cloak>
+            {{msg+'----'+112}}
+        </div>
+    </div>
+    <!-- 引入Vue.js文件 -->
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <!-- 使用vue语法实现功能 -->
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: 'hello Vue '
+            }
+
+        })
+    </script>
+</body>
+
+</html>

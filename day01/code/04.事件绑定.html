@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<body>
+    <div id="app">
+        <div>{{num}}</div>
+        <button v-on:click="handle1()">点击1</button>
+        <button @click="handle2">点击2</button>
+
+
+    </div>
+    <script src="../js/vue.js"></script>
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                num: 0
+            },
+            methods: {
+                handle1: function () {
+                    this.num++
+                },
+                handle2() {
+                    this.num++
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>

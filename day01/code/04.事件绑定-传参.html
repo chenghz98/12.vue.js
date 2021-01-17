@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<body>
+    <div id="app">
+        <!--带括号的事件绑定传参是,事件对象必须用$event,-->
+        <!--不带括号的第一个参数默认为事件对象-->
+        <button v-on:click="handle1(1,2,$event)">点击1</button>
+        <button @click="handle2">点击2</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+
+            methods: {
+                handle1: function (p1, p2, e) {
+                    console.log(p1, p2, e);
+                },
+                handle2(e) {
+                    console.log(e);
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>

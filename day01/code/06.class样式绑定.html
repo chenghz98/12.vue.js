@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .aa {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+        }
+    </style>
+
+<body>
+    <div id="app">
+        <div :class="[{aa : isAA}]">class样式</div>
+        <div :class="{aa : isAA}">class样式</div>
+        <button @click="handle()">点击</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                isAA: true
+            },
+            methods: {
+                handle() {
+                    this.isAA = !this.isAA
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
