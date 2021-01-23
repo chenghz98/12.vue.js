@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .grid {
+            margin: auto;
+            width: 530px;
+            text-align: center;
+        }
+
+        .grid table {
+            border-top: 1px solid #C2D89A;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .grid th,
+        td {
+            padding: 10;
+            border: 1px dashed #F3DCAB;
+            height: 35px;
+            line-height: 35px;
+        }
+
+        .grid th {
+            background-color: #F3DCAB;
+        }
+
+        .grid .book {
+            padding-bottom: 10px;
+            padding-top: 5px;
+            background-color: #F3DCAB;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="grid">
+            <div>
+                <h1>图书管理</h1>
+                <div class="book">
+                    <div>
+                        <label for="id">
+                            编号：
+                        </label>
+                        <input type="text" id="id" v-model='id' :disabled='flag'>
+                        <label for="name">
+                            名称：
+                        </label>
+                        <input type="text" id="name" v-model='name'>
+                        <button @click='handle'>提交</button>
+                    </div>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr :key='item.id' v-for="item in books">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.date}}</td>
+                        <td>
+                            <a href="" @click.prevent='toEdit(item.id)'>修改</a>
+                            <span>|</span>
+                            <a href="" @click.prevent='del(item.id)'>删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript">
+        /*
+      图书管理-图书列表展示功能
+      注意事项：<a href="" @click.prevent>修改</a>
+      事件绑定时，可以只添加修饰符，而不绑定事件函数
+    */
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false,
+                id: '',
+                name: '',
+                books: [{
+                    id: 1,
+                    name: '三国演义',
+                    date: ''
+                }, {
+                    id: 2,
+                    name: '水浒传',
+                    date: ''
+                }, {
+                    id: 3,
+                    name: '红楼梦',
+                    date: ''
+                }, {
+                    id: 4,
+                    name: '西游记',
+                    date: ''
+                }]
+            },
+            methods: {
+                handle() {
+                    //如果flag为true即input该被禁用时
+                    if (this.flag) {
+                        this.books.some((item) => {
+                            if (item.id == this.id) {
+                                //如果找到了与input中视图id相同的data数据id,就将视图修改的name返回给数据item.name,然后返回true终止函数
+                                item.name = this.name
+                                return true
+                            }
+                        })
+                        // 编辑书籍完成后 将flag变为false,解除id框的input禁用
+                        this.flag = false
+                    } else {
+                        // 检测一下那个 key 是否存在
+                        let r = this.books.findIndex(item => item.id == this.id)
+                        if (r !== -1) return alert('已存在 ID');
+                        var book = {}
+                        book.id = this.id
+                        book.name = this.name
+                        book.date = ''
+                        // 运用push方法新增书籍列表
+                        this.books.push(book);
+                        // 清空表单
+
+                    }
+                    this.id = '';
+                    this.name = '';
+                },
+                toEdit(id) {
+                    this.flag = true;
+                    //用filter遍历data数据获取id与事件触发id相同的数据
+                    var book = this.books.filter(function (item) {
+                        return item.id == id
+                    })
+                    //把获取到的列表信息的id与name传给与input进行双向数据绑定的this.id,this.name,渲染到页面
+                    this.id = book[0].id
+                    this.name = book[0].name
+                },
+                del(id) {
+
+                    //将与事件触发id 不同的数据渲染
+                    this.books = this.books.filter(item => {
+                        return item.id !== id
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
