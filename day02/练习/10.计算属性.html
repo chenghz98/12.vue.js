@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <div>{{reverseMsg}}</div>
+        <input type="text" v-model="msg" @keyup.delete="handle()">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.config.keyCodes = {
+            // camelCase won`t work
+            delete: 46
+        }
+        const vm = new Vue({
+            el: '#app',
+            // 本部数据
+            data: {
+                msg: 'hello'
+            },
+            // 计算属性
+            computed: {
+                reverseMsg: function () {
+                    return this.msg.split('').reverse().join('')
+                }
+            },
+            // 方法
+            methods: {
+                handle() {
+                    this.msg = ''
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

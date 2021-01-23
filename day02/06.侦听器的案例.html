@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<body>
+    <div id="app">
+        <input type="text" v-model.lazy='uname'>
+        <div>{{tip}}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            // 本部数据
+            data: {
+                uname: "",
+                tip: ""
+            },
+
+
+            // 方法
+            methods: {
+                handle: function (uname) {
+                    var that = this
+                    //定时器的this指向window,故需将函数实例对象this指向that
+                    setTimeout(function () {
+                        if (uname === 'admin') {
+                            that.tip = "用户名已存在,请重新输入"
+                        } else {
+                            that.tip = "用户名可用"
+                        }
+                    }, 2000)
+                }
+            },
+            // 侦听器
+            watch: {
+                uname: function (val) {
+                    this.handle(val)
+                    this.tip = '正在验证......'
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

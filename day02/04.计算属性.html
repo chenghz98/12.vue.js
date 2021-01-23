@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<body>
+    <div id="app">
+        <div>{{reverseString}}</div>
+        <div>{{reverseString}}</div>
+        <div>{{reverseMessage()}}</div>
+        <div>{{reverseMessage()}}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.4.3/dist/vue-router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            // 指令
+            directives: {
+
+            },
+            // 本部数据
+            data: {
+                msg: 'hello',
+                num: 100
+            },
+            // 计算属性
+            computed: {
+                reverseString: function () {
+                    console.log('computed')
+                    // return this.msg.split('').reverse().join('');
+                    var total = 0;
+                    for (var i = 0; i <= this.num; i++) {
+                        total += i;
+                    }
+                    return total;
+                }
+            },
+            // 方法
+            methods: {
+                reverseMessage() {
+                    console.log('methods');
+                    return this.msg.split('').reverse().join('')
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

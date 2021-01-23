@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #father {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{num}}</div>
+        <div @click='handle1()' id="father">
+            <!--事件修饰符stop解决事件冒泡-->
+            <button @click.stop="handle2($event)">点击</button>
+            <!--prevent阻止默认事件-->
+            <a href="path" target="_blank" @click.prevent.stop='handle3()'>{{msg}}</a>
+            <!--按键修饰符-->
+            <input type="text" @keyup.delete='handle4()' v-model="info">
+            <input type="text" @keyup.enter='handle4()' v-model="info">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.config.keyCodes.enter = 13
+        const vm = new Vue({
+            el: '#app',
+            // 本部数据
+            data: {
+                num: 0,
+                msg: '百度',
+                path: "http://www.baidu.com",
+                info: ""
+            },
+
+            // 方法
+            methods: {
+                handle1() {
+                    this.num++
+                },
+                handle2(e) {
+                    //原生js 解决事件冒泡的方法
+                    // e.stopPropagation()
+                    this.num++
+                },
+                handle3() {
+                    this.msg = '淘宝'
+                    this.path = "http://www.taobao.com"
+                },
+                handle4() {
+                    this.info = ''
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!--插值表达式-->
+        <!--指令v-cloak 防止闪烁-->
+        <div v-cloak>{{msg}}</div>
+        <!--指令v-text 数据填充,填充的文本数据,不会解析HTML标签,可以防止闪烁-->
+        <div v-text='msg'></div>
+        <!--指令v-html填充的是解析HTML标签后的数据 ,可能有安全问题-->
+        <div v-html='info'></div>
+        <div v-text='info'></div>
+        <!--指令v-pre填充的是原始数据,未经vue编译-->
+        <div v-pre>{{info}}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello world',
+                info: '<h1>hello Vue</h1>'
+            },
+            // 方法
+            methods: {
+
+            },
+        });
+    </script>
+</body>
+
+</html>
