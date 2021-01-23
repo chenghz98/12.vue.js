@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <fruit-list :list='list'>
+            <!-- 获取的传过来的数据 slotProps里面是包含传过来的所有数据-->
+            <template slot-scope='slotProps'>
+                <span>{{slotProps.item.name}}</span>
+            </template>
+        </fruit-list>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component("fruit-list", {
+            props: ['list'],
+            template: `
+                <ul>
+                    <li :key='item.id' v-for='item in list'>
+                        <slot :item='item'>{{item}}</slot>
+                        </li>
+                </ul>
+            `
+        })
+        const vm = new Vue({
+            el: '#app',
+            // 本部数据
+            data: {
+                list: [{
+                    id: 1,
+                    name: 'apple'
+                }, {
+                    id: 2,
+                    name: 'orange'
+                }, {
+                    id: 3,
+                    name: 'lemon'
+                }]
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <base-layout>
+            <template #header>
+                <!--! #填坑-->
+                <p>头部信息</p>
+            </template>
+            <p>主体内容</p>
+            <template #footer>
+                <p>尾部信息</p>
+            </template>
+        </base-layout>
+    </div>
+    <template id="base-layout">
+        <div>
+            <header>
+                <!--! #1挖一个带名字的坑-->
+                <slot name='header'></slot>
+            </header>
+            <main>
+                <slot></slot>
+            </main>
+            <footer>
+                <slot name='footer'></slot>
+            </footer>
+        </div>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('base-layout', {
+            template: '#base-layout'
+        })
+        const vm = new Vue({
+            el: '#app',
+        });
+    </script>
+</body>
+
+</html>

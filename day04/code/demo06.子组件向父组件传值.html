@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div :style='{fontSize:fontsize+"px"}'>{{msg}}</div>
+        <test-item @enlarge-text='handle' :parr='parr' :msg='msg'></test-item>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.4.3/dist/vue-router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js"></script>
+    <script>
+        Vue.component('test-item', {
+            props: ['msg', 'parr'],
+            template: `
+            <div>
+               <ul>
+                    <li :key='index' v-for='(item,index) in parr'>{{item}}</li>
+                </ul>
+                <button @click="$emit('enlarge-text')">点击</button>
+                <button @click="$emit('add-text')">点击</button>
+            </div>
+            `
+
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '给爷变',
+                parr: ['apple', 'orange', 'banana'],
+                fontsize: 10
+            },
+            methods: {
+                handle() {
+                    this.fontsize += 10
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

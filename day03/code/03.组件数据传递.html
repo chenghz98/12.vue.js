@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <menu-item :test-title='ptitle'></menu-item>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('menu-item', {
+            props: ['testTitle'],
+            template: `<div>{{testTitle}}</div>`
+        })
+        const vm = new Vue({
+            el: '#app',
+            components: {
+
+            },
+            // 本部数据
+            data: {
+                msg: 'aaaaa',
+                ptitle: '父组件传递的内容'
+            },
+            // 方法
+            methods: {
+
+            },
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <test-item></test-item>
+        <test-item>你好</test-item>
+        <test-item>服务器错误</test-item>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component('test-item', {
+            template: `
+                <div>
+                    <strong>ERROR:</strong>
+                    <slot>默认内容</slot>    
+                </div>
+            `
+        })
+        const vm = new Vue({
+            el: "#app",
+        })
+    </script>
+</body>
+
+</html>

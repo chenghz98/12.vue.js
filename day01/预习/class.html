@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            z-index: 1111;
+        }
+
+        .active {
+            width: 100px;
+            height: 100px;
+            background-color: darkorange;
+        }
+
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: darkseagreen;
+            border: 5px solid rgb(122, 96, 87);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div :class="{active:isActive}">
+            <div class="son"></div>
+        </div>
+        <button v-on:click="handle">点击 </button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                isActive: true
+            },
+            methods: {
+                handle() {
+                    this.isActive = !this.isActive
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -11,24 +11,35 @@
             height: 200px;
             background-color: aqua;
         }
+
+        .bb {
+            width: 200px;
+            height: 200px;
+            background-color: darkorange;
+        }
     </style>
 
 <body>
     <div id="app">
-        <div :class="[{aa : isAA}]">class样式</div>
-        <div :class="{aa : isAA}">class样式</div>
-        <button @click="handle()">点击</button>
+        <div :class="[isAA ? 'aa' : 'bb']">class样式</div>
+        <div :class="[isBB?'bb':'aa']">class样式</div>
+        <button @click="handle1()">点击</button>
+        <button @click="handle2()">点击</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         const vm = new Vue({
             el: '#app',
             data: {
-                isAA: true
+                isAA: true,
+                isBB: true
             },
             methods: {
-                handle() {
+                handle1() {
                     this.isAA = !this.isAA
+                },
+                handle2() {
+                    this.isBB = !this.isBB
                 }
             },
         });

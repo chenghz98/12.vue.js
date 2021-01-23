@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <hello-world></hello-world>
+        <item-com></item-com>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.4.3/dist/vue-router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js"></script>
+    <script>
+        Vue.component('item-com', {
+            data() {
+                return {
+                    msg: 'test'
+                }
+            },
+            template: `
+                <div>{{msg}}</div>
+               <!--! 局部组件只能在其声明的vue实例中使用 -->
+               <!--! <div><hello-world></hello-world></hello-world> -->
+            `
+        })
+        const HelloWorld = {
+            data: function () {
+                return {
+                    msg: 'helloWorld'
+                }
+            },
+            template: `
+                <div>{{msg}}</div>
+            `
+        }
+        const vm = new Vue({
+            el: '#app',
+            // 组件
+            components: {
+                'hello-world': HelloWorld
+            }
+        });
+    </script>
+</body>
+
+</html>

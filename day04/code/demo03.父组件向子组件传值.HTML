@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <div>
+            <!-- <menu-title :msg='msg'></menu-title> -->
+            <menu-title :msg='msg' :first-name='firstName' :last-name='lastName'></menu-title>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.4.3/dist/vue-router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js"></script>
+    <script>
+        Vue.component('menu-title', {
+            props: ['msg', 'lastName', 'firstName'],
+            template: `
+                <div>{{msg+"  " + firstName +'  '+ lastName}}</div>
+            `
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '爸爸要向儿子传的数据',
+                firstName: 'Tom',
+                lastName: 'Jerry',
+            }
+        });
+    </script>
+</body>
+
+</html>

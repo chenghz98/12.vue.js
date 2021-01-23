@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <test-item>
+            <template #header>
+                <h2>震惊-----</h2>
+            </template>
+            <p>此处省略8万字,请自行脑补</p>
+            <template #footer>
+                <div>尾部信息</div>
+            </template>
+        </test-item>
+    </div>
+    <template id='cc'>
+        <div>
+            <header>
+                <slot name='header'></slot>
+            </header>
+            <main>
+                <slot></slot>
+            </main>
+            <footer>
+                <slot name='footer'></slot>
+            </footer>
+        </div>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.4.3/dist/vue-router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js"></script>
+    <script>
+        Vue.component('test-item', {
+            template: "#cc"
+        })
+        const vm = new Vue({
+            el: '#app',
+
+        });
+    </script>
+</body>
+
+</html>

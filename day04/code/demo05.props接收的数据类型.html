@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <props-test :num='num' :str='str' :arr='arr' :obj='obj' :flag='flag'></props-test>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@3.4.3/dist/vue-router.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuex@3.5.1/dist/vuex.min.js"></script>
+    <script>
+        Vue.component('props-test', {
+            props: ['num', 'str', 'arr', 'obj', 'flag'],
+            template: `
+            <div>
+                <div>{{num}}</div>
+                <div>{{str}}</div>
+                <div>{{typeof flag+ '  '  +flag}}</div>
+                <ul>
+                    <li :key='index' v-for='(item,index) in arr'>{{item}}</li>
+                </ul>
+                <div>
+                    <span>{{obj.name}}</span>    
+                    <span>{{obj.age}}</span>  
+                </div>
+            </div>
+            `
+        })
+        const vm = new Vue({
+            el: '#app',
+            // 本部数据
+            data: {
+                num: 123,
+                str: 'hello world',
+                arr: [1, '你好', '我爱吃apple'],
+                obj: {
+                    name: '张三',
+                    age: 17
+                },
+                flag: true
+            },
+        });
+    </script>
+</body>
+
+</html>
