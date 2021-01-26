@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/vue_2.5.22.js"></script>
+    <script src="lib/vue-router_3.0.2.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!--TODO: 1添加路由链接-->
+        <router-link to="/user">user</router-link>
+        <router-link to="/register">register</router-link>
+        <!--TODO: 2 添加路由占位符-->
+        <router-view></router-view>
+    </div>
+
+    <script>
+        // <!--TODO 3 创建路由组件-->
+        const User = {
+            template: `
+                <h2>用户组件</h2>
+            `
+        }
+        const Register = {
+            template: `
+                <h2>注册组件</h2>
+            `
+        }
+        // <!--TODO: 4 配置路由规则并创建路由实例-->
+        const router = new VueRouter({
+            routes: [{
+                path: '/',
+                component: User
+            }, {
+                path: '/user',
+                component: User
+            }, {
+                path: '/register',
+                component: Register
+            }]
+        })
+        const vm = new Vue({
+            el: '#app',
+
+            // <!--TODO: 5 挂载路由-->
+            router
+        })
+    </script>
+</body>
+
+</html>

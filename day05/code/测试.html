@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function queryData(url) {
+            return new Promise(function (resolve, reject) {
+                $.ajax({
+                    url,
+                    success(data) {
+                        resolve(data);
+                    },
+                    error(err) {
+                        reject(err);
+                    }
+                });
+            });
+        }
+
+        async function run() {
+            // await 之后的返回值，就是这个 Promise resolve 的结果
+            // await 必须会等待当前代码执行完毕，才会往后继续
+            let r1 = await queryData('http://localhost:3000/data');
+            let r2 = await queryData('http://localhost:3000/data1');
+            let r3 = await queryData('http://localhost:3000/data2');
+            console.log(r1, r2, r3);
+        }
+        run();
+        
+
+        /* queryData('http://localhost:3000/data').then(data => {
+            console.log(data);
+            // 这一步 return 的结果会当作外层 then 的返回值
+            return queryData('http://localhost:3000/data1');
+        }).then(data => {
+            console.log(data);
+            // 这一步 return 的结果会当作外层 then 的返回值
+            return queryData('http://localhost:3000/data2');
+        }).then(data => {
+            console.log(data);
+        }); */
+    </script>
+</body>
+
+</html>

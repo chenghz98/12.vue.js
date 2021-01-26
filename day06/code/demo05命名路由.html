@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/vue_2.5.22.js"></script>
+    <script src="lib/vue-router_3.0.2.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/user/1">user1</router-link>
+        <router-link to="/user/2">user2</router-link>
+        <!--to前面加上':'进行属性绑定, name 路由的名称  params 路由需要携带的参数-->
+        <router-link :to="{name:'user',params:{id:3}}">user3</router-link>
+        <router-link to="/register">register</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script>
+        const User = {
+            props: ['id', 'uname', 'age'],
+            template: `
+                <h1>User--id:{{id}}--姓名:{{uname}}--年龄:{{age}}</h1>
+            `
+        }
+        const Register = {
+            template: `
+                <h1>register组件</h1>
+            `
+        }
+        const router = new VueRouter({
+            routes: [{
+                //命名路由 用name属性对路由进行命名
+                name: 'user',
+                path: '/user/:id',
+                component: User,
+                //props通过函数的形参进行传参,
+                props: route => ({
+                    id: route.params.id,
+                    uname: '张三',
+                    age: 13
+                })
+            }, {
+                path: '/register',
+                component: Register
+            }]
+        })
+        const vm = new Vue({
+            el: '#app',
+            router
+        })
+    </script>
+</body>
+
+</html>

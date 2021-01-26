@@ -1,28 +1,29 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+// const axios = require('axios')
 // 处理静态资源
 app.use(express.static('public'))
 // 处理参数
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // 设置允许跨域访问该服务
 app.all('*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Headers', 'mytoken');
-  next();
-});
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, mytoken')
+  // res.header('Access-Control-Allow-Headers', 'Content-Type');
+  // res.header('Access-Control-Allow-Headers', 'mytoken');
+  next()
+})
 app.get('/async1', (req, res) => {
   res.send('hello1')
 })
 app.get('/async2', (req, res) => {
-  if(req.query.info == 'hello') {
+  if (req.query.info == 'hello') {
     res.send('world')
-  }else{
+  } else {
     res.send('error')
   }
 })
@@ -50,9 +51,8 @@ app.get('/axios-json', (req, res) => {
   res.json({
     uname: 'lisi',
     age: 12
-  });
+  })
 })
-
 
 app.get('/fdata', (req, res) => {
   res.send('Hello Fetch!')
@@ -78,33 +78,35 @@ app.get('/json', (req, res) => {
     uname: 'lisi',
     age: 13,
     gender: 'male'
-  });
+  })
 })
 
 app.get('/a1', (req, res) => {
-  setTimeout(function(){
+  setTimeout(function () {
     res.send('Hello TOM!')
-  },1000);
+  }, 1000)
 })
 app.get('/a2', (req, res) => {
-  setTimeout(function(){
+  setTimeout(function () {
     res.send('Hello JERRY!')
-  },2000);
+  }, 2000)
 })
 app.get('/a3', (req, res) => {
-  setTimeout(function(){
+  setTimeout(function () {
     res.send('Hello SPIKE!')
-  },3000);
+  }, 3000)
 })
 
 // 路由
 app.get('/data', (req, res) => {
-  res.send('Hello World!')
+  setTimeout(function () {
+    res.send('Hello World!')
+  }, 2000)
 })
 app.get('/data1', (req, res) => {
-  setTimeout(function(){
+  setTimeout(function () {
     res.send('Hello TOM!')
-  },1000);
+  }, 1000)
 })
 app.get('/data2', (req, res) => {
   res.send('Hello JERRY!')

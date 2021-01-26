@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script type="text/javascript" src="js/axios.js"></script>
+    <script type="text/javascript">
+        axios.defaults.baseURL = 'http://localhost:3000';
+        // 之所以可以在 then 之后拿到结果，是因为 axios 内部做了这样一个操作 resolve(res)
+        /* axios.get('adata').then(function (res) {
+            console.log(res.data)
+        }); */
+
+        // 1. await 必须放 async 函数里面
+        // 2. await 后面一般都要跟一个 Promise，await 之后的返回值就是这个 Promise resolve 的结果
+        // 3. 用 async 修饰的函数是异步函数，异步函数调用完毕的返回值是 Promise
+        /* async function queryData() {
+            const res = await axios.get('adata');
+            console.log(res);
+        }
+        queryData(); */
+
+        async function queryData() {
+            const res = await axios.get('adata');
+            return res;
+            // 上面写法，相当于内部会有下面的包装
+            // return Promise.resolve(res);
+        }
+        queryData().then(r => {
+            console.log(r);
+        });
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+    // async function queryData() {
+    //   var ret = await new Promise(function(resolve, reject){
+    //     setTimeout(function(){
+    //       resolve('nihao')
+    //     },1000);
+    //   })
+    //   // console.log(ret.data)
+    //   return ret;
+    // }
+    // queryData().then(function(data){
+    //   console.log(data)
+    // })
+    </script>

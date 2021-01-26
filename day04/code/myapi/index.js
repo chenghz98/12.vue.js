@@ -11,9 +11,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Headers', 'mytoken');
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, mytoken");
+  // res.header('Access-Control-Allow-Headers', 'Content-Type');
+  // res.header('Access-Control-Allow-Headers', 'mytoken');
   next();
 });
 app.get('/async1', (req, res) => {
@@ -99,7 +99,10 @@ app.get('/a3', (req, res) => {
 
 // 路由
 app.get('/data', (req, res) => {
-  res.send('Hello World!')
+  setTimeout(function(){
+    res.send('Hello World!')
+  },2000);
+  
 })
 app.get('/data1', (req, res) => {
   setTimeout(function(){

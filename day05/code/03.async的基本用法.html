@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="js/axios.js"></script>
+    <script>
+        axios.defaults.baseURL = 'http://localhost:3000';
+
+        async function queryData() {
+            const res = await axios.get('adata');
+            return res;
+            // 上面写法，相当于内部会有下面的包装
+            // return Promise.resolve(res);
+        }
+        queryData().then(r => {
+            console.log(r);
+        });
+    </script>
+</body>
+
+</html>

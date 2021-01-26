@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/vue_2.5.22.js"></script>
+    <script src="lib/vue-router_3.0.2.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to='/user'>user</router-link>
+        <router-link to='/register'>register</router-link>
+
+        <router-view></router-view>
+    </div>
+
+
+    <script>
+        const User = {
+            template: `
+            <div>
+                <h1>user组件</h1>
+                
+                <router-link to='/user1'>user1</router-link>
+                <router-link to='/user2'>user2</router-link>
+                <router-view></router-view>
+            </div>
+            `
+        }
+
+        const Register = {
+            template: `
+                <h1>注册组件</h1>
+            `
+        }
+        const User1 = {
+            template: `
+                <h3>User1组件</h3>
+                `
+        }
+        const User2 = {
+            template: `
+                <h3>User2组件</h3>
+                `
+        }
+
+
+        const router = new VueRouter({
+            routes: [{
+                path: '/',
+                component: User
+            }, {
+                path: '/user',
+                component: User,
+                children: [{
+                    path: "/user1",
+                    component: User1
+                }, {
+                    path: "/user2",
+                    component: User2
+                }]
+            }, {
+                path: '/register',
+                component: Register
+            }]
+        })
+        const vm = new Vue({
+            el: '#app',
+            router
+        })
+    </script>
+</body>
+
+</html>

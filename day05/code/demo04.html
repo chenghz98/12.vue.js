@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function queryData(url) {
+            return new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest()
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState != 4) return
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        resolve(xhr.responseText);
+
+                    } else {
+                        reject('服务器错误')
+                    }
+                }
+                xhr.open('get', url)
+                xhr.send(null)
+            })
+        }
+
+        const p1 = queryData('http://localhost:3000/a1')
+        const p2 = queryData('http://localhost:3000/a2')
+        const p3 = queryData('http://localhost:3000/a3')
+        //并发的处理多个异步任务,等所有任务执行完成才会返回结果
+        Promise.all([p1, p2, p3]).then(function (data) {
+            console.log(data);
+        })
+        //并发处理多个异步任务,只要有一个任务处理完成就返回结果
+        Promise.race([p1, p2, p3]).then(function (data) {
+            console.log(data);
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue_2.5.22.js"></script>
+    <script src="./lib/vue-router_3.0.2.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/user/1">User1</router-link>
+        <router-link to="/user/2">User2</router-link>
+        <router-link to="/user/3">User3</router-link>
+        <router-link to="/register">Register</router-link>
+        <router-view></router-view>
+    </div>
+
+
+    <script>
+        const User = {
+
+            template: `
+                <div>
+                    <h1>User组件-----用户id为{{$route.params.id}}</h1>
+                    <button @click='goRegister'>跳转到register</button>
+                </div>
+            `,
+            methods: {
+                goRegister() {
+                    //这种方式传参,通过$route.query.uname接收
+                    // this.$router.push('/register?uname=aa')
+
+                    // 这种方式传参和上面功能一样,通过$route.query.uname接收
+                    // this.$router.push({
+                    //     path: '/register',
+                    //     query: {
+                    //         uname: 'iii'
+                    //     }
+                    // })
+
+                    // name 跳转配合 params 传参，通过 $route.params.name 接收
+                    this.$router.push({
+                        name: 'register',
+                        params: {
+                            uname: 'if33'
+                        }
+                    })
+                }
+            },
+        }
+        const Register = {
+            template: `
+                <h1>Register组件{{$route.params.uname}}</h1>
+            `
+        }
+        const router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    redirect: '/user/1'
+                }, {
+
+                    path: '/user/:id',
+                    component: User,
+
+                },
+                {
+                    name: 'register',
+                    path: '/register',
+                    component: Register
+                },
+            ]
+        })
+        const xm = new Vue({
+            el: "#app",
+            router
+        })
+    </script>
+</body>
+
+</html>

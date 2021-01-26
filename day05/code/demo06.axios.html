@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="js/axios.js"></script>
+    <script>
+        /*    axios.get('http://localhost:3000/adata').then(function (ret) {
+            console.log(ret.data);
+        }) */
+
+        // axios.get('http://localhost:3000/axios?id=123').then(function (ret) {
+        //     console.log(ret.data);
+        // })
+        // axios.get('http://localhost:3000/axios/123').then(function (ret) {
+        //     console.log(ret.data);
+        // })
+        // axios.get('http://localhost:3000/axios', {
+        //     params: {
+        //         id: 12123
+        //     }
+        // }).then(function (ret) {
+        //     console.log(ret.data);
+        // })
+
+
+        // post 传递参数
+        /*   const params = new URLSearchParams();
+          params.append('uname', '张三')
+          params.append('pwd', '123d')
+          axios.post('http://localhost:3000/axios', params).then(function (ret) {
+              console.log(ret.data);
+          }) */
+
+        /* axios.post('http://localhost:3000/axios', {
+            uname: 'ewr',
+            pwd: 234
+        }).then(function (ret) {
+            console.log(ret.data);
+        }) */
+
+        // 全局配置
+        //<!--TODO 配置响应超时时间-->
+        // axios.defaults.timeout = 3000
+        //<!--TODO 配置默认地址-->
+        axios.defaults.baseURL = 'http://localhost:3000'
+        //<!--TODO 配置请求头-->
+        axios.defaults.headers['mytoken'] = '324appADD'
+        axios.post('/axios', {
+            uname: 'ewr',
+            pwd: 234
+        }).then(function (ret) {
+            console.log(ret.data);
+        })
+    </script>
+</body>
+
+</html>

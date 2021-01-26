@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="js/jquery.js"></script>
+    <script>
+        //异步任务,执行不一定按从上到下的顺序执行,要按顺序执行需要嵌套回调函数，容易形成回调地狱
+        $
+        /* .ajax({
+                    url: "http://localhost:3000/data",
+                    method: '',
+                    success: function (data) {
+                        console.log(data)
+                        $.ajax({
+                            url: "http://localhost:3000/data1",
+                            success: function (data) {
+                                console.log(data)
+                                $.ajax({
+                                    url: "http://localhost:3000/data2",
+                                    success: function (data) {
+                                        console.log(data)
+                                    }
+                                })
+                            }
+                        })
+                    }
+                }) */
+
+        var p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                var flag = false
+                if (flag) {
+                    resolve('hello')
+                } else {
+                    reject('出错了')
+                }
+            }, 300);
+        })
+
+        p.then(function (data) {
+            console.log(data);
+        }, function (info) {
+            console.log(info);
+        })
+    </script>
+</body>
+
+</html>

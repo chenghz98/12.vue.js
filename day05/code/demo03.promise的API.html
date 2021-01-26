@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function pro() {
+            return new Promise(function (resolve, reject) {
+                /* setTimeout(() => {
+                    resolve('123')
+                }, 100), */
+                setTimeout(() => {
+                    reject('2332')
+                }, 100);
+            })
+        }
+
+        pro('http://localhost:3000/data')
+            .then(function (data) {
+                console.log(data);
+            })
+
+            //捕获错误
+            .catch(function (data) {
+                console.log(data);
+            })
+
+            //不管是执行then还是执行catch最后都会执行finally
+            .finally(() => {
+                console.log('finished');
+            })
+    </script>
+</body>
+
+</html>

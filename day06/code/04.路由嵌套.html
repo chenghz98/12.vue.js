@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/vue_2.5.22.js"></script>
+    <script src="lib/vue-router_3.0.2.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="user">User</router-link>
+        <router-link to="register">Register</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        const User = {
+            template: `
+            <div>
+                <h1>User组件</h1> 
+            </div>
+            `
+        }
+        const Register = {
+            template: `
+            <div>
+                <h1>Register组件</h1>
+            <hr/>
+                <router-link to="/register/tab1">Tab1</router-link>
+                <router-link to="/register/tab2">Tab2</router-link>
+                <router-view></router-view>
+            </div>
+            `
+        }
+        const Tab1 = {
+            template: `<h2>Tab1</h2>`
+        }
+        const Tab2 = {
+            template: `<h2>Tab2</h2>`
+        }
+
+        const router = new VueRouter({
+
+
+            routes: [
+                // 路由重定向,当路由path为:'/'时,让它重定向到"/user"    
+                {
+                    path: '/',
+                    redirect: '/user'
+                },
+                {
+                    path: '/user',
+                    component: User,
+
+                },
+                {
+                    path: '/register',
+                    redirect: '/register/tab1'
+                },
+                {
+                    path: '/register',
+                    component: Register,
+                    children: [{
+                            path: 'tab1',
+                            component: Tab1
+                        },
+                        {
+                            path: 'tab2',
+                            component: Tab2
+                        }
+                    ]
+                }
+            ]
+        })
+
+        const vm = new Vue({
+            el: "#app",
+            // <!--TODO: #4 挂载路由实例 -->
+            // router: router
+            router
+        })
+    </script>
+
+</body>
+
+</html>
